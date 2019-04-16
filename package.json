@@ -9,8 +9,9 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.4",
-    "react-navigation": "^3.8.1",
-    "react-native-gesture-handler": "^1.0.12"
+    "react-native-gesture-handler": "^1.0.12",
+    "react-native-swiper": "^1.5.14",
+    "react-navigation": "^3.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

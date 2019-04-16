@@ -8,6 +8,8 @@ import { Image } from 'react-native';
 import BackButton from './components/BackButton';
 import User from './pages/Personal';
 import Home from './pages/Home';
+import Follow from './pages/Follow';
+import Collection from './pages/Collection';
 import HomeActiveIcon from './assets/home-active.png';
 import HomeInActiveIcon from './assets/home-inactive.png';
 import UserActiveIcon from './assets/user-active.png';
@@ -45,7 +47,19 @@ const UserStack = createStackNavigator(
     User: {
       screen: User,
       navigationOptions: {
-        title: 'User'
+        title: '个人中心'
+      }
+    },
+    Collection: {
+      screen: Collection,
+      navigationOptions: {
+        title: '回复的话题'
+      }
+    },
+    Follow: {
+      screen: Follow,
+      navigationOptions: {
+        title: '关注的人'
       }
     }
   },
