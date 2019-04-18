@@ -10,6 +10,7 @@ import User from './pages/Personal';
 import Home from './pages/Home';
 import Follow from './pages/Follow';
 import Collection from './pages/Collection';
+import Create from './pages/Create';
 import HomeActiveIcon from './assets/home-active.png';
 import HomeInActiveIcon from './assets/home-inactive.png';
 import UserActiveIcon from './assets/user-active.png';
@@ -33,6 +34,12 @@ const HomeStack = createStackNavigator(
       screen: Home,
       navigationOptions: {
         title: '首页'
+      }
+    },
+    Create: {
+      screen: Create,
+      navigationOptions: {
+        title: '发布话题'
       }
     }
   },

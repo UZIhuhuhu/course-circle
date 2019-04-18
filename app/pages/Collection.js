@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import SwiperItem from '../components/SwiperItem';
+import CardItem from '../components/CardItem';
 export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello</Text>
-        <SwiperItem />
+        <CardItem />
       </View>
     );
   }

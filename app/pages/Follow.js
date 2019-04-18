@@ -27,7 +27,7 @@ export default class Follow extends Component {
   render() {
     const { followingList } = this.state;
     return (
-      <View style={styles.container}>
+      <View style={styles.block}>
         <ScrollView>
           <FlatList
             keyboardShouldPersistTaps='always'
@@ -43,8 +43,23 @@ export default class Follow extends Component {
     );
   }
 }
+const paddingCommon = {
+  paddingHorizontal: 8,
+  paddingVertical: 16
+};
+const borderCommon = {
+  borderRadius: 4,
+  borderWidth: 1,
+  borderColor: '#f1f4f6'
+};
 
 const styles = StyleSheet.create({
+  block: {
+    ...paddingCommon,
+    marginBottom: 10,
+    backgroundColor: '#f1f4f6',
+    ...borderCommon
+  },
   container: {
     paddingHorizontal: 12,
     paddingBottom: 16

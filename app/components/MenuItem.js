@@ -3,7 +3,7 @@ import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 // import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 import ArrowRightIcon from '../assets/arrow-right.png';
-
+import Avatar from '../assets/avatar.png';
 class MenuItem extends PureComponent {
   static defaultProps = {
     params: {},

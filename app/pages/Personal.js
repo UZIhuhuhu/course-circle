@@ -23,14 +23,24 @@ export default class Home extends Component {
         <View>
           <Image style={styles.avatar} source={Avatar} />
         </View>
+        {/* <View style={styles.block}> */}
         {menuList.map(item => {
           return <MenuItem {...item} key={item.content} />;
         })}
+        {/* </View> */}
       </View>
     );
   }
 }
-
+const paddingCommon = {
+  paddingHorizontal: 8,
+  paddingVertical: 16
+};
+const borderCommon = {
+  borderRadius: 4,
+  borderWidth: 1,
+  borderColor: '#f1f4f6'
+};
 const styles = StyleSheet.create({
   container: {
     padding: 10,
@@ -43,5 +53,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50
+  },
+  block: {
+    ...paddingCommon,
+    marginBottom: 10,
+    backgroundColor: '#f1f4f6',
+    ...borderCommon
   }
 });
