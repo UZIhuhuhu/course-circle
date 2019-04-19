@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, View, Text } from 'react-native';
 import Avatar from '../assets/avatar.png';
+import Avatar1 from '../assets/avatar1.png';
+import Avatar2 from '../assets/avatar2.png';
 const createDiscussionItem = ({ nickname, content, avatar }, index) => (
   <View style={styles.surroundingItem} key={index}>
     <Image
@@ -32,14 +34,14 @@ export default class CardItem extends Component {
         avatar: Avatar
       },
       {
-        nickname: 'Wynn',
-        content: '在南京邮电大学读书是一种怎样的体验',
-        avatar: Avatar
+        nickname: 'Salt',
+        content: '跨端框架的实践和优化',
+        avatar: Avatar1
       },
       {
-        nickname: 'Wynn',
-        content: '在南京邮电大学读书是一种怎样的体验',
-        avatar: Avatar
+        nickname: 'Hash',
+        content: '函数式编程中的函子',
+        avatar: Avatar2
       }
     ]
   };

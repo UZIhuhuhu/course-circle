@@ -27,7 +27,7 @@ export default class Follow extends Component {
   render() {
     const { followingList } = this.state;
     return (
-      <View style={styles.block}>
+      <View style={styles.container}>
         <ScrollView>
           <FlatList
             keyboardShouldPersistTaps='always'

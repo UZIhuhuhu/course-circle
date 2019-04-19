@@ -9,7 +9,7 @@ const logger = require('koa-logger');
 const index = require('./routes/index');
 const users = require('./routes/users');
 
-const dbConfig = require('./config/mysql-config');
+// const dbConfig = require('./config/mysql-config');
 // error handler
 onerror(app);
 

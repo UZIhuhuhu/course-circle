@@ -1,19 +1,22 @@
-const router = require('koa-router')()
-
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
-})
-
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
-
-router.get('/json', async (ctx, next) => {
+const router = require('koa-router')();
+const models = require('../models');
+router.get('/comments', async (ctx, next) => {
+  const comments = await models.Comment.findAll();
+  // await ctx.render('index', {
+  //   title: 'Hello Koa 2!'
+  // });
   ctx.body = {
-    title: 'koa2 json'
-  }
-})
+    comments
+  };
+});
 
-module.exports = router
+router.get('/comments:id', async ctx => {
+  const comment = await models.Comment.findOne({
+    where: { id: ctx.params.id }
+  });
+  ctx.body = {
+    comment
+  };
+});
+
+module.exports = router;
