@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Follow from './pages/Follow';
 import Collection from './pages/Collection';
 import Create from './pages/Create';
+import DetailPage from './pages/DetailPage';
 import HomeActiveIcon from './assets/home-active.png';
 import HomeInActiveIcon from './assets/home-inactive.png';
 import UserActiveIcon from './assets/user-active.png';
@@ -41,6 +42,12 @@ const HomeStack = createStackNavigator(
       navigationOptions: {
         title: '发布话题'
       }
+    },
+    DetailPage: {
+      screen: DetailPage,
+      navigationOptions: {
+        title: '话题详情'
+      }
     }
   },
   {
@@ -67,6 +74,12 @@ const UserStack = createStackNavigator(
       screen: Follow,
       navigationOptions: {
         title: '关注的人'
+      }
+    },
+    DetailPage: {
+      screen: DetailPage,
+      navigationOptions: {
+        title: '话题详情'
       }
     }
   },

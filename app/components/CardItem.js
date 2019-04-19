@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, View, Text } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  TouchableHighlight
+} from 'react-native';
 import Avatar from '../assets/avatar.png';
 import Avatar1 from '../assets/avatar1.png';
 import Avatar2 from '../assets/avatar2.png';
-const createDiscussionItem = ({ nickname, content, avatar }, index) => (
-  <View style={styles.surroundingItem} key={index}>
-    <Image
-      source={avatar}
-      style={{
-        width: 45,
-        height: 45
-      }}
-    />
-    <View
-      style={{
-        marginLeft: 20,
-        marginRight: 24,
-        flex: 3
-      }}
-    >
-      <Text style={styles.title}>{nickname}</Text>
-      <Text style={styles.infoDetail}>{content || 'N/A'}</Text>
-    </View>
-  </View>
-);
+import { withNavigation } from 'react-navigation';
 
-export default class CardItem extends Component {
+class CardItem extends Component {
   state = {
     discussionList: [
       {
@@ -47,6 +33,34 @@ export default class CardItem extends Component {
   };
   render() {
     const { discussionList } = this.state;
+    const { navigation } = this.props;
+    const createDiscussionItem = ({ nickname, content, avatar }, index) => (
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate('DetailPage');
+        }}
+      >
+        <View style={styles.surroundingItem} key={index}>
+          <Image
+            source={avatar}
+            style={{
+              width: 45,
+              height: 45
+            }}
+          />
+          <View
+            style={{
+              marginLeft: 20,
+              marginRight: 24,
+              flex: 3
+            }}
+          >
+            <Text style={styles.title}>{nickname}</Text>
+            <Text style={styles.infoDetail}>{content || 'N/A'}</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
     return (
       <View>
         {discussionList.map((item, index) => createDiscussionItem(item, index))}
@@ -78,3 +92,5 @@ const styles = StyleSheet.create({
     lineHeight: 18
   }
 });
+
+export default withNavigation(CardItem);
