@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   Replys.associate = function(models) {
     // associations can be defined here
-    Replys.hasMany(models.Comment);
+    // Replys.hasMany(models.Comment);
   };
+  Replys.sync({ alter: true });
   return Replys;
 };

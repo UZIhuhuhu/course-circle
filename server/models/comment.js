@@ -18,5 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     //   }
     // });
   };
+  Comment.sync({ alter: true });
   return Comment;
 };
