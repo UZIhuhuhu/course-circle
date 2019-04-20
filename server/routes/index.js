@@ -2,14 +2,14 @@ const router = require('koa-router')();
 const models = require('../models');
 // const bodyparser = require('koa-bodyparser');
 
-router.get('/comments', async (ctx, next) => {
+router.get('/comments', async ctx => {
   const comments = await models.Comment.findAll();
   ctx.body = {
     comments
   };
 });
 
-router.get('/comment:id', async (ctx, next) => {
+router.get('/comment:id', async ctx => {
   const comment = await models.Comment.findOne({
     where: { id: ctx.params.id }
   });
@@ -18,7 +18,7 @@ router.get('/comment:id', async (ctx, next) => {
   };
 });
 
-router.post('/addComment', async (ctx, next) => {
+router.post('/addComment', async ctx => {
   console.log(ctx);
   console.log(ctx.request);
   const comments = await models.Comment.create(ctx.request.body.comment);

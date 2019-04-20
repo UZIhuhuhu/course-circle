@@ -4,6 +4,7 @@ import Avatar from '../assets/avatar3.png';
 import AccountIcon from '../assets/account.png';
 import CollectIcon from '../assets/collect.png';
 import MenuItem from '../components/MenuItem';
+
 const menuList = [
   {
     icon: AccountIcon,
@@ -24,9 +25,9 @@ export default class Home extends Component {
           <Image style={styles.avatar} source={Avatar} />
         </View>
         {/* <View style={styles.block}> */}
-        {menuList.map(item => {
-          return <MenuItem {...item} key={item.content} />;
-        })}
+        {menuList.map(item => (
+          <MenuItem {...item} key={item.content} />
+        ))}
         {/* </View> */}
       </View>
     );

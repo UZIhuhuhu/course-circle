@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, View, ScrollView, FlatList } from 'react-native';
-import Avatar from '../assets/avatar.png';
+import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
 import FollowItem from '../components/FollowItem';
 import { getFollowList } from '../api/index';
+
 export default class Follow extends Component {
   state = {
     followingList: []
   };
-  renderItem = ({ item }) => <FollowItem {...item} />;
+
   componentDidMount() {
     getFollowList()
       .then(res => res.json())
@@ -17,13 +17,16 @@ export default class Follow extends Component {
         });
       });
   }
+
+  renderItem = ({ item }) => <FollowItem {...item} />;
+
   render() {
     const { followingList } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView>
           <FlatList
-            keyboardShouldPersistTaps='always'
+            keyboardShouldPersistTaps="always"
             data={followingList}
             renderItem={this.renderItem}
             keyExtractor={(item, index) =>

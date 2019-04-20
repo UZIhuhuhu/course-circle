@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar2.png';
+
 export default withNavigation(({ nickname, school }) => (
   <TouchableOpacity style={styles.item} activeOpacity={1}>
     <View style={styles.itemContainer}>

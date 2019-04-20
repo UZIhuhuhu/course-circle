@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar.png';
+
 class DetailPage extends Component {
   state = {
     nickname: 'Wynn',
@@ -23,6 +24,7 @@ class DetailPage extends Component {
       }
     ]
   };
+
   render() {
     const { nickname, title, content, replyList } = this.state;
 

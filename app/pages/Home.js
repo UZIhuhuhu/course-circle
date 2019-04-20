@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import SwiperItem from '../components/SwiperItem';
 import FloatButton from '../components/FloatButton';
 import CardItem from '../components/CardItem';
+
 export default class Home extends Component {
   render() {
     return (

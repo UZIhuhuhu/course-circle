@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
+
 class Create extends Component {
   state = {
     title: '',
     content: ''
   };
+
   handleTitleInput = ({ text }) => {
     this.setState({ title: text });
   };
@@ -13,28 +15,30 @@ class Create extends Component {
   handleContentInput = ({ text }) => {
     this.setState({ content: text });
   };
+
   hanldeSubmit = () => {
     const { title, content } = this.state;
     console.log(title, content);
   };
+
   render() {
     return (
       <View style={styles.block}>
         <View style={styles.input}>
           <TextInput
-            placeholder='请输入标题'
+            placeholder="请输入标题"
             onChange={this.handleTitleInput}
           />
         </View>
         <View style={styles.contentInput}>
           <TextInput
-            placeholder='请输入内容'
+            placeholder="请输入内容"
             onChange={this.handleContentInput}
             style={{ height: 100 }}
           />
         </View>
         <View style={{ width: 100 }}>
-          <Button title='发布话题' color='#5fbdaa' />
+          <Button title="发布话题" color="#5fbdaa" />
         </View>
       </View>
     );

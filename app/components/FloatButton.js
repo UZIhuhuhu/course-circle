@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
-import PencilIcon from '../assets/pencil.png';
 import { withNavigation } from 'react-navigation';
+import PencilIcon from '../assets/pencil.png';
 
 class FloatButton extends Component {
   navigateToCreatePage = () => {
     const { navigation } = this.props;
     navigation.navigate('Create');
   };
+
   render() {
     return (
       <TouchableOpacity onPress={this.navigateToCreatePage}>

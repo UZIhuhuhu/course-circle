@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
 import Swiper from 'react-native-swiper';
 import SwiperImage1 from '../assets/swiper1.jpg';
 import SwiperImage2 from '../assets/swiper2.jpg';
 import SwiperImage3 from '../assets/swiper3.jpg';
+
 export default class SwiperItem extends Component {
   state = {
     followingList: [
@@ -18,12 +19,13 @@ export default class SwiperItem extends Component {
       }
     ]
   };
+
   render() {
     const { followingList } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView style={styles.wrapper}>
-          <Swiper style={styles.wrapper} activeDotColor='#fff'>
+          <Swiper style={styles.wrapper} activeDotColor="#fff">
             {followingList.map(uri => (
               <View
                 borderTopRightRadius={4}

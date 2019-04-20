@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import CardItem from '../components/CardItem';
+
 export default class Home extends Component {
   render() {
     return (

@@ -6,19 +6,18 @@ import {
   Text,
   TouchableHighlight
 } from 'react-native';
-import Avatar from '../assets/avatar.png';
 import { withNavigation } from 'react-navigation';
+import Avatar from '../assets/avatar.png';
 import { getCommentList } from '../api/index';
 
 class CardItem extends Component {
   state = {
     discussionList: []
   };
+
   componentDidMount() {
     getCommentList()
-      .then(res => {
-        return res.json();
-      })
+      .then(res => res.json())
       .then(res => {
         this.setState(
           {
@@ -30,6 +29,7 @@ class CardItem extends Component {
         );
       });
   }
+
   render() {
     const { discussionList } = this.state;
     const { navigation } = this.props;
