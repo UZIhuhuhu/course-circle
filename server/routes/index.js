@@ -28,7 +28,8 @@ router.get('/myComment', async ctx => {
 
 router.get('/comment:id', async ctx => {
   const comment = await models.Comment.findOne({
-    where: { id: ctx.params.id }
+    where: { id: ctx.params.id },
+    include: [models.Replys]
   });
   ctx.body = {
     comment
