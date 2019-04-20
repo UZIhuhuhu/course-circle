@@ -1,10 +1,10 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Follow = sequelize.define(
     'Follow',
     {
       nickname: DataTypes.STRING,
-      school: DataTypes.STRING
+      school: DataTypes.STRING,
+      following: DataTypes.STRING
     },
     {}
   );

@@ -13,7 +13,7 @@ export default class Home extends Component {
             <SwiperItem />
           </View>
           <View style={styles.block}>
-            <CardItem />
+            <CardItem personal={false} />
           </View>
         </ScrollView>
         <View style={styles.float}>

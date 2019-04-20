@@ -8,21 +8,34 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar.png';
-import { getCommentList } from '../api/index';
+import { getCommentList, getCollection } from '../api/index';
 
 class CardItem extends Component {
   state = {
     discussionList: []
   };
 
+  static defaultProps = {
+    personal: true
+  };
+
   componentDidMount() {
-    getCommentList()
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          discussionList: res.comments
-        });
-      });
+    const { personal } = this.props;
+    personal
+      ? getCollection()
+          .then(res => res.json())
+          .then(res => {
+            this.setState({
+              discussionList: res.comments
+            });
+          })
+      : getCommentList()
+          .then(res => res.json())
+          .then(res => {
+            this.setState({
+              discussionList: res.comments
+            });
+          });
   }
 
   render() {

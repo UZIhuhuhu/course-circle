@@ -7,7 +7,9 @@ const bodyParser = bodyparser({
 });
 
 router.get('/comments', async ctx => {
-  const comments = await models.Comment.findAll();
+  const comments = await models.Comment.findAll({
+    include: [models.Replys]
+  });
   ctx.body = {
     comments
   };
