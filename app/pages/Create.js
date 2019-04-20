@@ -13,6 +13,10 @@ class Create extends Component {
   handleContentInput = ({ text }) => {
     this.setState({ content: text });
   };
+  hanldeSubmit = () => {
+    const { title, content } = this.state;
+    console.log(title, content);
+  };
   render() {
     return (
       <View style={styles.block}>

@@ -9,7 +9,7 @@ router.get('/comments', async (ctx, next) => {
   };
 });
 
-router.get('/comment:id', async ctx => {
+router.get('/comment:id', async (ctx, next) => {
   const comment = await models.Comment.findOne({
     where: { id: ctx.params.id }
   });
@@ -18,7 +18,7 @@ router.get('/comment:id', async ctx => {
   };
 });
 
-router.post('/addComment', async ctx => {
+router.post('/addComment', async (ctx, next) => {
   console.log(ctx);
   console.log(ctx.request);
   const comments = await models.Comment.create(ctx.request.body.comment);

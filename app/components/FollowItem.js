@@ -1,18 +1,19 @@
 import React from 'react';
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
-export default withNavigation(({ avatar, nickname, classroom }) => (
+import Avatar from '../assets/avatar2.png';
+export default withNavigation(({ nickname, school }) => (
   <TouchableOpacity style={styles.item} activeOpacity={1}>
     <View style={styles.itemContainer}>
       <View>
-        <Image style={styles.avatar} source={avatar} />
+        <Image style={styles.avatar} source={Avatar} />
       </View>
       <View style={{ marginLeft: 20 }}>
         <View>
           <Text style={styles.nickname}>{nickname}</Text>
         </View>
         <View>
-          <Text>{classroom}</Text>
+          <Text>{school}</Text>
         </View>
       </View>
     </View>
