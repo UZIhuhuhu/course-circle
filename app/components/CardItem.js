@@ -7,42 +7,42 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Avatar from '../assets/avatar.png';
-import Avatar1 from '../assets/avatar1.png';
-import Avatar2 from '../assets/avatar2.png';
 import { withNavigation } from 'react-navigation';
+import { getCommentList } from '../api/index';
 
 class CardItem extends Component {
   state = {
-    discussionList: [
-      {
-        nickname: 'Wynn',
-        content: '在南京邮电大学读书是一种怎样的体验',
-        avatar: Avatar
-      },
-      {
-        nickname: 'Salt',
-        content: '跨端框架的实践和优化',
-        avatar: Avatar1
-      },
-      {
-        nickname: 'Hash',
-        content: '函数式编程中的函子',
-        avatar: Avatar2
-      }
-    ]
+    discussionList: []
   };
+  componentDidMount() {
+    getCommentList()
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        this.setState(
+          {
+            discussionList: res.comments
+          },
+          () => {
+            console.log(this.state.discussionList);
+          }
+        );
+      });
+  }
   render() {
     const { discussionList } = this.state;
     const { navigation } = this.props;
-    const createDiscussionItem = ({ nickname, content, avatar }, index) => (
+    const createDiscussionItem = ({ author, title }, index) => (
       <TouchableHighlight
+        key={index}
         onPress={() => {
           navigation.navigate('DetailPage');
         }}
       >
         <View style={styles.surroundingItem} key={index}>
           <Image
-            source={avatar}
+            source={Avatar}
             style={{
               width: 45,
               height: 45
@@ -55,8 +55,8 @@ class CardItem extends Component {
               flex: 3
             }}
           >
-            <Text style={styles.title}>{nickname}</Text>
-            <Text style={styles.infoDetail}>{content || 'N/A'}</Text>
+            <Text style={styles.title}>{author}</Text>
+            <Text style={styles.infoDetail}>{title || 'N/A'}</Text>
           </View>
         </View>
       </TouchableHighlight>
