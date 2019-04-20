@@ -13,6 +13,17 @@ router.get('/comments', async ctx => {
   };
 });
 
+router.get('/myComment', async ctx => {
+  const comments = await models.Comment.findAll({
+    where: {
+      author: 'Salt'
+    }
+  });
+  ctx.body = {
+    comments
+  };
+});
+
 router.get('/comment:id', async ctx => {
   const comment = await models.Comment.findOne({
     where: { id: ctx.params.id }

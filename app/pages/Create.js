@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { addComment } from '../api/index';
 
 class Create extends Component {
   state = {
@@ -8,17 +9,37 @@ class Create extends Component {
     content: ''
   };
 
-  handleTitleInput = ({ text }) => {
+  handleTitleInput = ({ nativeEvent: { text } }) => {
     this.setState({ title: text });
   };
 
-  handleContentInput = ({ text }) => {
+  isEmpty = () => this.state.title && this.state.content;
+
+  handleContentInput = ({ nativeEvent: { text } }) => {
     this.setState({ content: text });
   };
 
   hanldeSubmit = () => {
     const { title, content } = this.state;
-    console.log(title, content);
+    const { navigation } = this.props;
+    if (this.isEmpty()) {
+      addComment(title, content)
+        .then(res => res.json())
+        .then(res => {
+          if (res) {
+            Alert.alert('Alert Title', '发布成功', [
+              {
+                text: 'OK',
+                onPress: () => {
+                  navigation.goBack();
+                }
+              }
+            ]);
+          }
+        });
+    } else {
+      Alert.alert('标题和内容不能为空');
+    }
   };
 
   render() {
@@ -38,7 +59,11 @@ class Create extends Component {
           />
         </View>
         <View style={{ width: 100 }}>
-          <Button title="发布话题" color="#5fbdaa" />
+          <Button
+            title="发布话题"
+            color="#5fbdaa"
+            onPress={this.hanldeSubmit}
+          />
         </View>
       </View>
     );

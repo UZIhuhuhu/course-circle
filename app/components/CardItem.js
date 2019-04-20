@@ -19,14 +19,9 @@ class CardItem extends Component {
     getCommentList()
       .then(res => res.json())
       .then(res => {
-        this.setState(
-          {
-            discussionList: res.comments
-          },
-          () => {
-            console.log(this.state.discussionList);
-          }
-        );
+        this.setState({
+          discussionList: res.comments
+        });
       });
   }
 
