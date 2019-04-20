@@ -2,31 +2,32 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar.png';
+import { getCommentDetail } from '../api/index';
 
 class DetailPage extends Component {
   state = {
-    nickname: 'Wynn',
-    title: '在南京邮电大学读书是一种怎样的体验',
-    content:
-      '南京邮电大学的学生在充满挑战的学术氛围中成长，体验并创造着丰富的校园文化生活。您可以通过本栏目提供的链接了解南邮学子的学习生活的各个层面。在这里，你可以找到您所需要的所有信息栏目。',
-    replyList: [
-      {
-        text: '你把大伙都给逗乐了',
-        author: 'Wynn'
-      },
-      {
-        text: '你把大伙都给逗乐了',
-        author: 'Wynn'
-      },
-      {
-        text: '你把大伙都给逗乐了',
-        author: 'Wynn'
-      }
-    ]
+    author: '',
+    title: '',
+    text: '',
+    Replys: []
   };
 
+  componentDidMount() {
+    const commentId = this.props.navigation.getParam('id');
+    getCommentDetail(commentId)
+      .then(res => res.json())
+      .then(({ comment }) => {
+        this.setState({
+          author: comment.author,
+          title: comment.title,
+          text: comment.text,
+          Replys: comment.Replys
+        });
+      });
+  }
+
   render() {
-    const { nickname, title, content, replyList } = this.state;
+    const { author, title, text, Replys } = this.state;
 
     return (
       <View style={styles.block}>
@@ -46,19 +47,19 @@ class DetailPage extends Component {
                 flex: 3
               }}
             >
-              <Text style={styles.title}>{nickname}</Text>
+              <Text style={styles.title}>{author}</Text>
               <Text style={styles.titleDetail}>{title}</Text>
             </View>
           </View>
           <View style={styles.content}>
-            <Text style={styles.infoDetail}>{content}</Text>
+            <Text style={styles.infoDetail}>{text}</Text>
           </View>
         </View>
         <View style={styles.divide}>
           <Text style={styles.divideDetail}>回复</Text>
         </View>
         <View>
-          {replyList.map((item, index) => (
+          {Replys.map((item, index) => (
             <View key={index} style={styles.replyContainer}>
               <View style={styles.replayHeader}>
                 <Image

@@ -41,11 +41,11 @@ class CardItem extends Component {
   render() {
     const { discussionList } = this.state;
     const { navigation } = this.props;
-    const createDiscussionItem = ({ author, title }, index) => (
+    const createDiscussionItem = ({ author, title, id }, index) => (
       <TouchableHighlight
         key={index}
         onPress={() => {
-          navigation.navigate('DetailPage');
+          navigation.navigate('DetailPage', { id });
         }}
       >
         <View style={styles.surroundingItem} key={index}>

@@ -6,6 +6,8 @@ export const getCommentList = () => fetch(`${REQUEST_URL}/comments`);
 
 export const getCollection = () => fetch(`${REQUEST_URL}/myComment`);
 
+export const getCommentDetail = id => fetch(`${REQUEST_URL}/comment${id}`);
+
 export const addComment = (title, text, author = `Salt`) =>
   fetch(`${REQUEST_URL}/addComment`, {
     method: 'POST',
