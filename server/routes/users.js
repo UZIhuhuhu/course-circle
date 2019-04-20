@@ -1,13 +1,20 @@
-const router = require('koa-router')()
+const router = require('koa-router')();
+const models = require('../models');
+// const bodyparser = require('koa-bodyparser');
 
-router.prefix('/users')
+router.prefix('/users');
 
-router.get('/', function (ctx, next) {
-  ctx.body = 'this is a users response!'
-})
+router.get('/followList', async ctx => {
+  const followList = await models.Follow.findAll();
+  ctx.body = {
+    followList
+  };
+});
 
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
-})
-
-module.exports = router
+router.post('/follow', async ctx => {
+  const followList = await models.Follow.create(ctx.request.body.nickname);
+  ctx.body = {
+    followList
+  };
+});
+module.exports = router;
