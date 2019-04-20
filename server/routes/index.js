@@ -1,6 +1,10 @@
 const router = require('koa-router')();
+const bodyparser = require('koa-bodyparser');
 const models = require('../models');
-// const bodyparser = require('koa-bodyparser');
+
+const bodyParser = bodyparser({
+  enableTypes: ['json', 'form', 'text']
+});
 
 router.get('/comments', async ctx => {
   const comments = await models.Comment.findAll();
@@ -18,10 +22,9 @@ router.get('/comment:id', async ctx => {
   };
 });
 
-router.post('/addComment', async ctx => {
-  console.log(ctx);
-  console.log(ctx.request);
-  const comments = await models.Comment.create(ctx.request.body.comment);
+router.post('/addComment', bodyParser, async ctx => {
+  const { title, text, author } = ctx.request.body;
+  const comments = await models.Comment.create({ title, text, author });
   ctx.body = {
     comments
   };
