@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  KeyboardAvoidingView
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar.png';
-import { getCommentDetail } from '../api/index';
+import { getCommentDetail, addComment } from '../api/index';
 
 class DetailPage extends Component {
   state = {
     author: '',
     title: '',
     text: '',
-    Replys: []
+    Replys: [],
+    comment: ''
   };
 
   componentDidMount() {
@@ -26,42 +35,33 @@ class DetailPage extends Component {
       });
   }
 
+  handleInput = ({ nativeEvent: { text } }) => {
+    this.setState({ comment: text });
+  };
+
+  handleSubmit = () => {
+    const commentId = this.props.navigation.getParam('id');
+    const { comment } = this.state;
+    addComment(comment, commentId)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      });
+  };
+
   render() {
     const { author, title, text, Replys } = this.state;
 
     return (
       <View style={styles.block}>
-        <View style={styles.surroundingItem}>
-          <View style={styles.headerItem}>
-            <Image
-              source={Avatar}
-              style={{
-                width: 45,
-                height: 45
-              }}
-            />
-            <View
-              style={{
-                marginLeft: 20,
-                marginRight: 24,
-                flex: 3
-              }}
-            >
-              <Text style={styles.title}>{author}</Text>
-              <Text style={styles.titleDetail}>{title}</Text>
-            </View>
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.infoDetail}>{text}</Text>
-          </View>
-        </View>
-        <View style={styles.divide}>
-          <Text style={styles.divideDetail}>回复</Text>
-        </View>
-        <View>
-          {Replys.map((item, index) => (
-            <View key={index} style={styles.replyContainer}>
-              <View style={styles.replayHeader}>
+        <ScrollView>
+          <KeyboardAvoidingView
+            behavior="position"
+            enabled
+            contentContainerStyle={styles.container}
+          >
+            <View style={styles.surroundingItem}>
+              <View style={styles.headerItem}>
                 <Image
                   source={Avatar}
                   style={{
@@ -76,14 +76,53 @@ class DetailPage extends Component {
                     flex: 3
                   }}
                 >
-                  <Text style={styles.title}>{item.author}</Text>
+                  <Text style={styles.title}>{author}</Text>
+                  <Text style={styles.titleDetail}>{title}</Text>
                 </View>
               </View>
-              <View style={{ paddingLeft: 10, paddingBottom: 10 }}>
-                <Text style={{ color: '#000000' }}>{item.text}</Text>
+              <View style={styles.content}>
+                <Text style={styles.infoDetail}>{text}</Text>
               </View>
             </View>
-          ))}
+            <View style={styles.divide}>
+              <Text style={styles.divideDetail}>回复</Text>
+            </View>
+            <View>
+              {Replys.map((item, index) => (
+                <View key={index} style={styles.replyContainer}>
+                  <View style={styles.replayHeader}>
+                    <Image
+                      source={Avatar}
+                      style={{
+                        width: 45,
+                        height: 45
+                      }}
+                    />
+                    <View
+                      style={{
+                        marginLeft: 20,
+                        marginRight: 24,
+                        flex: 3
+                      }}
+                    >
+                      <Text style={styles.title}>{item.author}</Text>
+                    </View>
+                  </View>
+                  <View style={{ paddingLeft: 10, paddingBottom: 10 }}>
+                    <Text style={{ color: '#000000' }}>{item.text}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </KeyboardAvoidingView>
+        </ScrollView>
+        <View style={{ backgroundColor: '#ffffff', marginHorizontal: 10 }}>
+          <TextInput
+            placeholder="留下评论吧"
+            returnKeyType="send"
+            onChange={this.handleInput}
+            onSubmitEditing={this.handleSubmit}
+          />
         </View>
       </View>
     );
