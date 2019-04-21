@@ -20,6 +20,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      following: {
+        type: Sequelize.STRING
       }
     }),
   down: queryInterface => queryInterface.dropTable('Replys')

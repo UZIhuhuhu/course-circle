@@ -46,9 +46,9 @@ router.post('/addComment', bodyParser, async ctx => {
 
 router.post('/addReply', bodyParser, async ctx => {
   const { text, author, commentId } = ctx.request.body;
-  const comments = await models.Replys.create({ text, author, commentId });
+  const reply = await models.Replys.create({ text, author, commentId });
   ctx.body = {
-    comments
+    reply
   };
 });
 

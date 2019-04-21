@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
+  Alert,
   KeyboardAvoidingView
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
@@ -45,7 +46,11 @@ class DetailPage extends Component {
     addReply(comment, commentId)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        this.setState(prevState => ({
+          Replys: prevState.Replys.concat(res.reply),
+          comment: ''
+        }));
+        Alert.alert('评论成功');
       });
   };
 
@@ -55,74 +60,83 @@ class DetailPage extends Component {
     return (
       <View style={styles.block}>
         <ScrollView>
+          <View style={styles.surroundingItem}>
+            <View style={styles.headerItem}>
+              <Image
+                source={Avatar}
+                style={{
+                  width: 45,
+                  height: 45
+                }}
+              />
+              <View
+                style={{
+                  marginLeft: 20,
+                  marginRight: 24,
+                  flex: 3
+                }}
+              >
+                <Text style={styles.title}>{author}</Text>
+                <Text style={styles.titleDetail}>{title}</Text>
+              </View>
+            </View>
+            <View style={styles.content}>
+              <Text style={styles.infoDetail}>{text}</Text>
+            </View>
+          </View>
+          <View style={styles.divide}>
+            <Text style={styles.divideDetail}>回复</Text>
+          </View>
+          <View>
+            {Replys.map((item, index) => (
+              <View key={index} style={styles.replyContainer}>
+                <View style={styles.replayHeader}>
+                  <Image
+                    source={Avatar}
+                    style={{
+                      width: 45,
+                      height: 45
+                    }}
+                  />
+                  <View
+                    style={{
+                      marginLeft: 20,
+                      marginRight: 24,
+                      flex: 3
+                    }}
+                  >
+                    <Text style={styles.title}>{item.author}</Text>
+                  </View>
+                </View>
+                <View style={{ paddingLeft: 10, paddingBottom: 10 }}>
+                  <Text style={{ color: '#000000' }}>{item.text}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+        <View
+          style={{
+            backgroundColor: '#ffffff',
+            marginHorizontal: 10,
+            position: 'absolute',
+            bottom: 10,
+            width: '100%'
+          }}
+        >
           <KeyboardAvoidingView
             behavior="position"
             enabled
-            contentContainerStyle={styles.container}
+            // contentContainerStyle={styles.container}
           >
-            <View style={styles.surroundingItem}>
-              <View style={styles.headerItem}>
-                <Image
-                  source={Avatar}
-                  style={{
-                    width: 45,
-                    height: 45
-                  }}
-                />
-                <View
-                  style={{
-                    marginLeft: 20,
-                    marginRight: 24,
-                    flex: 3
-                  }}
-                >
-                  <Text style={styles.title}>{author}</Text>
-                  <Text style={styles.titleDetail}>{title}</Text>
-                </View>
-              </View>
-              <View style={styles.content}>
-                <Text style={styles.infoDetail}>{text}</Text>
-              </View>
-            </View>
-            <View style={styles.divide}>
-              <Text style={styles.divideDetail}>回复</Text>
-            </View>
-            <View>
-              {Replys.map((item, index) => (
-                <View key={index} style={styles.replyContainer}>
-                  <View style={styles.replayHeader}>
-                    <Image
-                      source={Avatar}
-                      style={{
-                        width: 45,
-                        height: 45
-                      }}
-                    />
-                    <View
-                      style={{
-                        marginLeft: 20,
-                        marginRight: 24,
-                        flex: 3
-                      }}
-                    >
-                      <Text style={styles.title}>{item.author}</Text>
-                    </View>
-                  </View>
-                  <View style={{ paddingLeft: 10, paddingBottom: 10 }}>
-                    <Text style={{ color: '#000000' }}>{item.text}</Text>
-                  </View>
-                </View>
-              ))}
-            </View>
+            <TextInput
+              placeholder="留下评论吧"
+              returnKeyType="send"
+              onChange={this.handleInput}
+              onSubmitEditing={this.handleSubmit}
+              value={this.state.comment}
+            />
           </KeyboardAvoidingView>
-        </ScrollView>
-        <View style={{ backgroundColor: '#ffffff', marginHorizontal: 10 }}>
-          <TextInput
-            placeholder="留下评论吧"
-            returnKeyType="send"
-            onChange={this.handleInput}
-            onSubmitEditing={this.handleSubmit}
-          />
         </View>
       </View>
     );
@@ -142,7 +156,11 @@ const styles = StyleSheet.create({
     ...paddingCommon,
     marginBottom: 10,
     backgroundColor: '#f1f4f6',
-    ...borderCommon
+    ...borderCommon,
+    height: 600
+  },
+  container: {
+    ...paddingCommon
   },
   surroundingItem: {
     marginTop: 8,

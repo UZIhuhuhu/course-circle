@@ -21,7 +21,7 @@ export const addComment = (title, text, author = `Salt`) =>
     })
   });
 
-export const addReply = (text, commentId, author = `Salt`) => {
+export const addReply = (text, commentId, author = `Salt`) =>
   fetch(`${REQUEST_URL}/addReply`, {
     method: 'POST',
     headers: {
@@ -33,6 +33,5 @@ export const addReply = (text, commentId, author = `Salt`) => {
       author
     })
   });
-};
 
 export const getFollowList = () => fetch(`${REQUEST_URL}/users/followList`);
