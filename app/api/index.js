@@ -8,20 +8,20 @@ export const getCollection = () => fetch(`${REQUEST_URL}/myComment`);
 
 export const getCommentDetail = id => fetch(`${REQUEST_URL}/comment${id}`);
 
-export const addComment = (text, commentId, author = `Salt`) =>
+export const addComment = (title, text, author = `Salt`) =>
   fetch(`${REQUEST_URL}/addComment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     },
     body: qs.stringify({
+      title,
       text,
-      commentId,
       author
     })
   });
 
-export const addReply = (text, author = `Salt`) => {
+export const addReply = (text, commentId, author = `Salt`) => {
   fetch(`${REQUEST_URL}/addReply`, {
     method: 'POST',
     headers: {
@@ -29,6 +29,7 @@ export const addReply = (text, author = `Salt`) => {
     },
     body: qs.stringify({
       text,
+      commentId,
       author
     })
   });

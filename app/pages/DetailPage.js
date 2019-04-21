@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar.png';
-import { getCommentDetail, addComment } from '../api/index';
+import { getCommentDetail, addReply } from '../api/index';
 
 class DetailPage extends Component {
   state = {
@@ -42,7 +42,7 @@ class DetailPage extends Component {
   handleSubmit = () => {
     const commentId = this.props.navigation.getParam('id');
     const { comment } = this.state;
-    addComment(comment, commentId)
+    addReply(comment, commentId)
       .then(res => res.json())
       .then(res => {
         console.log(res);
