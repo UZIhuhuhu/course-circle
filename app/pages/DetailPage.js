@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Avatar from '../assets/avatar.png';
+import Avatar1 from '../assets/avatar1.png';
 import { getCommentDetail, addReply } from '../api/index';
 
 class DetailPage extends Component {
@@ -19,7 +20,8 @@ class DetailPage extends Component {
     title: '',
     text: '',
     Replys: [],
-    comment: ''
+    comment: '',
+    following: ''
   };
 
   componentDidMount() {
@@ -31,7 +33,8 @@ class DetailPage extends Component {
           author: comment.author,
           title: comment.title,
           text: comment.text,
-          Replys: comment.Replys
+          Replys: comment.Replys,
+          following: comment.following
         });
       });
   }
@@ -55,8 +58,62 @@ class DetailPage extends Component {
   };
 
   render() {
-    const { author, title, text, Replys } = this.state;
-
+    const { author, title, text, Replys, following } = this.state;
+    const IdentityItem = followingCase => {
+      switch (followingCase) {
+        case 'true':
+          return (
+            <Text
+              style={{
+                backgroundColor: '#5fbdaa',
+                width: 60,
+                textAlign: 'center',
+                borderRadius: 4,
+                color: '#ffffff',
+                height: 25,
+                lineHeight: 25,
+                marginLeft: 6
+              }}
+            >
+              已关注
+            </Text>
+          );
+        case 'owner':
+          return (
+            <Text
+              style={{
+                backgroundColor: '#F9A825',
+                width: 60,
+                textAlign: 'center',
+                borderRadius: 4,
+                color: '#ffffff',
+                height: 25,
+                lineHeight: 25,
+                marginLeft: 6
+              }}
+            >
+              自己
+            </Text>
+          );
+        default:
+          return (
+            <Text
+              style={{
+                backgroundColor: '#e57373',
+                width: 60,
+                textAlign: 'center',
+                borderRadius: 4,
+                color: '#ffffff',
+                height: 25,
+                lineHeight: 25,
+                marginLeft: 6
+              }}
+            >
+              关注他
+            </Text>
+          );
+      }
+    };
     return (
       <View style={styles.block}>
         <ScrollView>
@@ -76,7 +133,15 @@ class DetailPage extends Component {
                   flex: 3
                 }}
               >
-                <Text style={styles.title}>{author}</Text>
+                <View
+                  style={{
+                    flex: 4,
+                    flexDirection: 'row'
+                  }}
+                >
+                  <Text style={styles.title}>{author}</Text>
+                  {IdentityItem(following)}
+                </View>
                 <Text style={styles.titleDetail}>{title}</Text>
               </View>
             </View>
@@ -92,7 +157,7 @@ class DetailPage extends Component {
               <View key={index} style={styles.replyContainer}>
                 <View style={styles.replayHeader}>
                   <Image
-                    source={Avatar}
+                    source={Avatar1}
                     style={{
                       width: 45,
                       height: 45
@@ -102,10 +167,12 @@ class DetailPage extends Component {
                     style={{
                       marginLeft: 20,
                       marginRight: 24,
-                      flex: 3
+                      flex: 3,
+                      flexDirection: 'row'
                     }}
                   >
                     <Text style={styles.title}>{item.author}</Text>
+                    {IdentityItem(item.following)}
                   </View>
                 </View>
                 <View style={{ paddingLeft: 10, paddingBottom: 10 }}>
